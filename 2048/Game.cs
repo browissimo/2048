@@ -21,9 +21,10 @@ namespace _2048
 
         private void Init()
         {
-            gameStep = new GameStep();
-            fieldSize = 5;
+            isFinish = false;
+            fieldSize = 4;
             field = new int[fieldSize, fieldSize];
+            gameStep = new GameStep(fieldSize, field);
 
             GameStart();
         }
@@ -32,7 +33,7 @@ namespace _2048
         {
             while (!isFinish)
             {
-                isFinish = gameStep.Step(fieldSize, field);
+                isFinish = gameStep.Step();
             }
             GameEnd();
         }
@@ -41,9 +42,8 @@ namespace _2048
         {
             Console.WriteLine("Чтобы сыграть еще раз нажмите любую клавишу");
             Console.ReadKey();
+            Console.Clear();
             Init();
-        }
-
-        
+        }    
     }
 }

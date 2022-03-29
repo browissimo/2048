@@ -9,9 +9,11 @@ namespace _2048
 {
     internal class GameStep
     {
+        
         readonly Random random = new Random();
         int fieldSize;
         int[,] field;
+        MoveCalculation moveCalculation = new MoveCalculation();
 
         public GameStep(int fieldSize, int[,] field)
         {
@@ -21,35 +23,40 @@ namespace _2048
 
         public bool Step()
         {
-            field = plusMoveField();
             fieldCreate();
             keysChecking();
+            field = generateDigit();
 
-            return true;
+            return false;
         }
 
-        //ОТРИСОВКА ПОЛЯ
         public void fieldCreate()
         {
             var pads = Helper.GetMaxValFromArr(field).ToString().Length;
 
             for (int i = 0; i < fieldSize; i++)
             {
-                Console.WriteLine(new string('-', (pads + 2 )* fieldSize));
+                Console.WriteLine(new string('-', 21));
                 Console.Write("|");
                 for (int k = 0; k < fieldSize; k++)
                 {
-                    Console.Write(string.Format($" {field[i, k].ToString().PadLeft(pads)}|", fieldSize));
+                    if (field[i,k] == 0)
+                    {
+                        Console.Write(string.Format($" |".PadLeft(5), fieldSize));
+                    }
+                    else
+                    {
+                        Console.Write(string.Format($" {field[i, k].ToString().PadLeft(3)}|", fieldSize));
+                    }
                 }
 
                 Console.WriteLine();
             }
 
-            Console.WriteLine(new string('-', (pads + 2) * fieldSize));
+            Console.WriteLine(new string('-', 21));
         }
 
-        //ГЕНЕРАЦИЯ 2 ИЛИ 4 В СОУЧАЙНОМ ПУСТОМ МЕСТЕ
-        public int[,] plusMoveField()
+        public int[,] generateDigit()
         {
             bool qnic;
             do
@@ -76,22 +83,26 @@ namespace _2048
         }
 
         //СЧИТЫВАНИЕ КЛАВИШ ОТ ПОЛЬЗОВАТЕЛЯ ПРИ ВХОДЕ
-        public int keysChecking()
+        public int[,] keysChecking()
         {
             ConsoleKeyInfo key = Console.ReadKey(false);
  
             switch (key.Key)
             {
                 case ConsoleKey.UpArrow:
-                    return 1;
+                    Console.Clear();
+                    return moveCalculation.Up(field);
                 case ConsoleKey.DownArrow:
-                    return 3;
+                    Console.Clear();
+                    return moveCalculation.Down(field);
                 case ConsoleKey.LeftArrow:
-                    return 4;
+                    Console.Clear();
+                    return moveCalculation.Left(field);
                 case ConsoleKey.RightArrow:
-                    return 2;
+                    Console.Clear();
+                    return moveCalculation.Right(field);
                 default:
-                    return -1;
+                    return new int[,] { };
             }
         }
     }

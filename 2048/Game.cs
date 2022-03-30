@@ -9,8 +9,6 @@ namespace _2048
 {
     internal class Game
     {
-        int fieldSize;
-        int[,] field;
         bool isFinish;
         GameStep gameStep;
 
@@ -22,8 +20,8 @@ namespace _2048
         private void Init()
         {
             isFinish = false;
-            fieldSize = 4;
-            field = new int[fieldSize, fieldSize];
+            int fieldSize = 2;
+            int[,] field = new int[fieldSize, fieldSize];
             gameStep = new GameStep(fieldSize, field);
 
             GameStart();

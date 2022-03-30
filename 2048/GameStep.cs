@@ -25,18 +25,18 @@ namespace _2048
         {
             fieldCreate();
             keysChecking();
-            field = generateDigit();
+            generateDigit();
 
             return false;
         }
 
         public void fieldCreate()
         {
-            var pads = Helper.GetMaxValFromArr(field).ToString().Length;
+            //var pads = Helper.GetMaxValFromArr(field).ToString().Length;
 
             for (int i = 0; i < fieldSize; i++)
             {
-                Console.WriteLine(new string('-', 21));
+                Console.WriteLine(new string('-', 5 * fieldSize));
                 Console.Write("|");
                 for (int k = 0; k < fieldSize; k++)
                 {
@@ -53,7 +53,7 @@ namespace _2048
                 Console.WriteLine();
             }
 
-            Console.WriteLine(new string('-', 21));
+            Console.WriteLine(new string('-', 5 * fieldSize));
         }
 
         public int[,] generateDigit()
@@ -91,18 +91,19 @@ namespace _2048
             {
                 case ConsoleKey.UpArrow:
                     Console.Clear();
-                    return moveCalculation.Up(field);
+                    return moveCalculation.Up(field, fieldSize);
                 case ConsoleKey.DownArrow:
                     Console.Clear();
-                    return moveCalculation.Down(field);
+                    return moveCalculation.Down(field, fieldSize);
                 case ConsoleKey.LeftArrow:
                     Console.Clear();
-                    return moveCalculation.Left(field);
+                    return moveCalculation.Left(field, fieldSize);
                 case ConsoleKey.RightArrow:
                     Console.Clear();
-                    return moveCalculation.Right(field);
+                    return moveCalculation.Right(field, fieldSize);
                 default:
-                    return new int[,] { };
+                    Console.WriteLine(" - не подходящий символ. Используйте стрелки");
+                    return keysChecking();
             }
         }
     }

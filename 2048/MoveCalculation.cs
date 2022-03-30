@@ -8,13 +8,13 @@ namespace _2048
 {
     internal class MoveCalculation
     {
-        public int[,] Up(int[,] field)
+        public int[,] Up(int[,] field, int fieldsize)
         {
-            for (int row = 0; row < 4; row++)
+            for (int row = 0; row < fieldsize; row++)
             {
-                for (int cell = 0; cell < 4; cell++)
+                for (int cell = 0; cell < fieldsize; cell++)
                 { 
-                    for (int prevCell = cell + 1; prevCell < 4; prevCell++)
+                    for (int prevCell = cell + 1; prevCell < fieldsize; prevCell++)
                     {
                         if (field[prevCell, row] != 0)
                         {
@@ -40,11 +40,11 @@ namespace _2048
             return field;
         }
 
-        public int[,] Down(int[,] field)
+        public int[,] Down(int[,] field, int fieldsize)
         {
-            for (int row = 3; row >= 0; row--)
+            for (int row = fieldsize - 1; row >= 0; row--)
             {
-                for (int cell = 3; cell >= 0; cell--)
+                for (int cell = fieldsize - 1; cell >= 0; cell--)
                 {
                     for (int prevCell = cell -1; prevCell >= 0; prevCell--)
                     {
@@ -72,11 +72,11 @@ namespace _2048
             return field;
         }
 
-        public int[,] Right(int[,] field)
+        public int[,] Right(int[,] field, int fieldsize)
         {
-            for (int cell = 3; cell >= 0; cell--)
+            for (int cell = fieldsize - 1; cell >= 0; cell--)
             {
-                for (int row = 3; row >= 0; row--)
+                for (int row = fieldsize - 1; row >= 0; row--)
                 {
                     for (int prevCell = cell - 1; prevCell >= 0; prevCell--)
                     {
@@ -104,13 +104,13 @@ namespace _2048
             return field;
         }
 
-        public int[,] Left(int[,] field)
+        public int[,] Left(int[,] field, int fieldsize)
         {
-            for (int cell = 0; cell < 4; cell++)
+            for (int cell = 0; cell < fieldsize; cell++)
             {
-                for (int row = 0; row < 4; row++)
+                for (int row = 0; row < fieldsize; row++)
                 {
-                    for (int prevCell = cell + 1; prevCell < 4; prevCell++)
+                    for (int prevCell = cell + 1; prevCell < fieldsize; prevCell++)
                     {
                         if (field[row, prevCell] != 0)
                         {

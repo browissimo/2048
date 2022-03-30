@@ -19,5 +19,21 @@ namespace _2048.Helpers
 
             return maxVal;
         }
+
+        public static bool DoesArrayContainNull(int [,] arr)
+        {
+            for (int i = 0; i < arr.GetLength(0); i++)
+            {
+                for (int j = 0; j < arr.GetLength(1); j++)
+                {
+                    if (arr[i,j] == 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
     }
 }

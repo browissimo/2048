@@ -13,6 +13,7 @@ namespace _2048
         readonly Random random = new Random();
         int fieldSize;
         int[,] field;
+        bool isDead = false;
         MoveCalculation moveCalculation = new MoveCalculation();
 
         public GameStep(int fieldSize, int[,] field)
@@ -24,15 +25,15 @@ namespace _2048
         public bool Step()
         {
             fieldCreate();
-            keysChecking();
-            generateDigit();
+            field = keysChecking();
+            field = generateDigit();
 
-            return false;
+            return isDead;
         }
 
         public void fieldCreate()
         {
-            //var pads = Helper.GetMaxValFromArr(field).ToString().Length;
+            
 
             for (int i = 0; i < fieldSize; i++)
             {
@@ -59,6 +60,13 @@ namespace _2048
         public int[,] generateDigit()
         {
             bool qnic;
+
+            if (!Helper.DoesArrayContainNull(field))
+            {
+                isDead = true;
+                return new int[0, 0];
+            }
+
             do
             {
                 int i = random.Next(0, fieldSize);

@@ -21,7 +21,7 @@ namespace _2048
         private void Init()
         {
             isFinish = false;
-            int fieldSize = 4;
+            int fieldSize = 2;
             field = new int[fieldSize, fieldSize];
             gameStep = new GameStep(fieldSize, field);
 
@@ -41,8 +41,14 @@ namespace _2048
         {
             gameStep.fieldCreate();
             Console.WriteLine();
+
             string score = Helper.GetMaxValFromArr(field).ToString();
-            Console.WriteLine($"Вы набрали {score} очков\n");
+            Helper.writeHightScore(score);
+
+            var highestScore = Helper.readHightScore();
+            
+            Console.WriteLine($"Выши очки:\t {score}\n");
+            Console.WriteLine($"Рекорд:\t {highestScore.ToString()} ");
             Console.WriteLine("Чтобы сыграть еще раз нажмите любую клавишу");
             Console.ReadKey();
             Console.Clear();

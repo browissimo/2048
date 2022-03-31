@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace _2048.Helpers
 {
@@ -63,6 +64,26 @@ namespace _2048.Helpers
             }
 
             return false;
+        }
+
+        public static int readHightScore()
+        {
+            using(StreamReader streamReader = new StreamReader("score.txt"))
+            {
+                int score = streamReader.Read();
+                return score;
+            }       
+        }
+
+        public static void writeHightScore(string score)
+        {            
+            StreamReader sr = new StreamReader("score.txt");
+            if (Convert.ToInt32(sr.ReadLine()) < Convert.ToInt32(score))
+            {
+                sr.Close();
+                using (StreamWriter sw = new StreamWriter("score.txt", false))
+                    sw.WriteLine(score);
+            }
         }
     }
 }

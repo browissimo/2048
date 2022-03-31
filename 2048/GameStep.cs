@@ -24,9 +24,25 @@ namespace _2048
 
         public bool Step()
         {
+            if (!Helper.DoesArrayContainNull(field) && !Helper.DoesArrayHaveSameValuesNearby(field))
+            {
+                return true;
+            }
+
             fieldCreate();
-            field = keysChecking();
-            field = generateDigit();
+            keysChecking();
+
+            if (!Helper.DoesArrayContainNull(field))
+            {
+                while (!Helper.DoesArrayContainNull(field) && Helper.DoesArrayHaveSameValuesNearby(field))
+                {
+                    fieldCreate();
+                    keysChecking();
+                }
+                //return isDead = true;
+            }
+
+            generateDigit();
 
             return isDead;
         }
@@ -60,12 +76,6 @@ namespace _2048
         public int[,] generateDigit()
         {
             bool qnic;
-
-            if (!Helper.DoesArrayContainNull(field))
-            {
-                isDead = true;
-                return new int[0, 0];
-            }
 
             do
             {

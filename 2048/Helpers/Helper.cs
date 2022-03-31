@@ -35,5 +35,34 @@ namespace _2048.Helpers
 
             return false;
         }
+
+        public static bool DoesArrayHaveSameValuesNearby(int [,] arr)
+        {
+            for (int i = 0; i < arr.GetLength(0) - 1; i++)
+            {
+                for (int j = 0; j < arr.GetLength(1); j++)
+                {
+                    if (arr[i,j] == arr[i+1,j])
+                    {
+                        return true;
+
+                    }
+                }
+            }
+
+            for (int i = 0; i < arr.GetLength(0); i++)
+            {
+                for (int j = 0; j < arr.GetLength(1) - 1; j++)
+                {
+                    if (arr[i, j] == arr[i, j + 1])
+                    {
+                        return true;
+
+                    }
+                }
+            }
+
+            return false;
+        }
     }
 }

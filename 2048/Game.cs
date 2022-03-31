@@ -21,7 +21,7 @@ namespace _2048
         private void Init()
         {
             isFinish = false;
-            int fieldSize = 2;
+            int fieldSize = 4;
             field = new int[fieldSize, fieldSize];
             gameStep = new GameStep(fieldSize, field);
 
@@ -39,6 +39,8 @@ namespace _2048
 
         private void GameEnd()
         {
+            gameStep.fieldCreate();
+            Console.WriteLine();
             string score = Helper.GetMaxValFromArr(field).ToString();
             Console.WriteLine($"Вы набрали {score} очков\n");
             Console.WriteLine("Чтобы сыграть еще раз нажмите любую клавишу");
